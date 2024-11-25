@@ -11,7 +11,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 driver = webdriver.Chrome()
 driver.maximize_window()
-file_path = r"D:\pytest\login info.xlsx"
+file_path = r"login info.xlsx"
 df = pd.read_excel(file_path)
 url = df.iloc[0, 1]
 stm1_userid = df.iloc[4, 1]
