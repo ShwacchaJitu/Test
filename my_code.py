@@ -218,11 +218,5 @@ driver.find_element(By.XPATH, "//div[@id='success-message-widget']//button[@clas
 time.sleep(2)
 time.sleep(2)
 print("Testing")
-print("Testing")
-print("Testing")
-print("Testing")
-print("Hello")
-print("Testing")
-print("Testing")
-print("Hello")
+print("CLH")
 
