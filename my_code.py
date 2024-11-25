@@ -216,7 +216,7 @@ time.sleep(2)
 driver.find_element(By.XPATH, "//button[normalize-space()='Save']").click()
 driver.find_element(By.XPATH, "//div[@id='success-message-widget']//button[@class='btn ack-dismiss-btn2'][normalize-space()='Dismiss']").click()
 time.sleep(2)
-
+time.sleep(2)
 print("Testing")
 print("Testing")
 print("Testing")
