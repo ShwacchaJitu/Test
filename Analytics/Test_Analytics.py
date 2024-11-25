@@ -12,7 +12,7 @@ from datetime import datetime
 
 @pytest.fixture(scope="module")
 def userprofile():
-    file_path = r"D:\Testcase\login info.xlsx"
+    file_path = r"D:\userinfo\login info.xlsx"
     df = pd.read_excel(file_path)
     driver = webdriver.Chrome()
     driver.maximize_window()
@@ -41,7 +41,7 @@ def take_screenshot(userprofile, request):
     driver = userprofile
     test_name = request.node.name
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    screenshots_dir = "screenshots/analytics"
+    screenshots_dir = "D:\Testcase\screenshots\Analytics"
 
     os.makedirs(screenshots_dir, exist_ok=True)
 
