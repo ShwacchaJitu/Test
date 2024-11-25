@@ -11,7 +11,7 @@ from datetime import datetime
 def org_login():
     driver = webdriver.Chrome()
     driver.maximize_window()
-    file_path = r"D:\pytest\login info.xlsx"
+    file_path = r"D:\userinfo\login info.xlsx"
     df = pd.read_excel(file_path)
     url = df.iloc[0, 1]
     org_userid = df.iloc[1, 1]
@@ -37,7 +37,7 @@ def take_screenshot(org_login, request):
     driver = org_login
     test_name = request.node.name
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    screenshots_dir = "D:/pytest/screenshots/Specialised Nutrition"
+    screenshots_dir = r"D:\Testcase\screenshots/Specialised Nutrition"
 
     os.makedirs(screenshots_dir, exist_ok=True)
 
@@ -61,7 +61,7 @@ def pytest_runtest_makereport(item, call):
         if driver:
             test_name = item.name
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-            screenshots_dir = "D:/pytest/screenshots/Specialised Nutrition"
+            screenshots_dir = r"D:\Testcase\screenshots/Specialised Nutrition"
             os.makedirs(screenshots_dir, exist_ok=True)
             file_name = f"{test_name}_failed_{timestamp}.png"
             file_path = os.path.join(screenshots_dir, file_name)
@@ -119,7 +119,7 @@ def test_search_Specialised_Nutrition(org_login, take_screenshot):
     Specialised_Nutrition_name = driver.find_element(By.XPATH,"/html/body/app-root/div[3]/app-view-nutrition/div[1]/div[2]/div[2]/div[1]/table/tbody/tr[1]/td[2]").text
     time.sleep(2)
     assert Specialised_Nutrition_name == Specialised_Nutrition
-    time.sleep(1)
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -127,6 +127,7 @@ def test_search_Specialised_Nutrition(org_login, take_screenshot):
 def test_refresh_Specialised_Nutrition(org_login, take_screenshot):
     driver = org_login
     driver.find_element(By.XPATH,"//img[@title='Refresh']").click()
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 

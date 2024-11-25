@@ -3,7 +3,7 @@ import time
 from faker import Faker
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import os
+import os.path
 import pandas as pd
 import os
 from datetime import datetime
@@ -13,7 +13,7 @@ from datetime import datetime
 def org_login():
     driver = webdriver.Chrome()
     driver.maximize_window()
-    file_path = r"D:\pytest\login info.xlsx"
+    file_path = r"D:\userinfo\login info.xlsx"
     df = pd.read_excel(file_path)
     url = df.iloc[0, 1]
     org_userid = df.iloc[1, 1]
@@ -38,7 +38,7 @@ def take_screenshot(org_login, request):
     driver = org_login
     test_name = request.node.name
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    screenshots_dir = "D:/pytest/screenshots/Physiotherapy_Exercises"
+    screenshots_dir = r"D:\Testcase\screenshots/Physiotherapy_Exercises"
 
     os.makedirs(screenshots_dir, exist_ok=True)
 
@@ -62,7 +62,7 @@ def pytest_runtest_makereport(item, call):
         if driver:
             test_name = item.name
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-            screenshots_dir = "D:/pytest/screenshots/Physiotherapy_Exercises"
+            screenshots_dir = r"D:\Testcase\screenshots/Physiotherapy_Exercises"
             os.makedirs(screenshots_dir, exist_ok=True)
             file_name = f"{test_name}_failed_{timestamp}.png"
             file_path = os.path.join(screenshots_dir, file_name)
@@ -75,7 +75,7 @@ def test_Physiotherapy_Exercises_page(org_login, take_screenshot):
     driver.find_element(By.XPATH, "//span[normalize-space()='Programme Management']").click()
     time.sleep(1)
     driver.find_element(By.XPATH, "//a[normalize-space()='Physiotherapy']").click()
-    time.sleep(1)
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -105,7 +105,7 @@ def test_Search_Physiotherapy_Exercises(org_login, take_screenshot):
     driver.find_element(By.XPATH,"//input[@placeholder='Search']").send_keys(exercise_name)
     exercise = driver.find_element(By.XPATH,"/html/body/app-root/div[3]/app-view-exercise/div/div[2]/div[2]/div[1]/table/tbody/tr[1]/td[1]").text
     assert exercise == exercise_name
-    time.sleep(1)
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 

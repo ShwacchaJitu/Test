@@ -12,7 +12,7 @@ from datetime import datetime
 def org_login():
     driver = webdriver.Chrome()
     driver.maximize_window()
-    file_path = r"D:\pytest\login info.xlsx"
+    file_path = r"D:\userinfo\login info.xlsx"
     df = pd.read_excel(file_path)
     url = df.iloc[0, 1]
     org_userid = df.iloc[1, 1]
@@ -38,7 +38,7 @@ def take_screenshot(org_login, request):
     driver = org_login
     test_name = request.node.name
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    screenshots_dir = "D:/pytest/screenshots/Physiotherapy_Equipments"
+    screenshots_dir = r"D:\Testcase\screenshots/Physiotherapy_Equipments"
 
     os.makedirs(screenshots_dir, exist_ok=True)
 
@@ -62,7 +62,7 @@ def pytest_runtest_makereport(item, call):
         if driver:
             test_name = item.name
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-            screenshots_dir = "D:/pytest/screenshots/Physiotherapy_Equipments"
+            screenshots_dir = r"D:\Testcase\screenshots/Physiotherapy_Equipments"
             os.makedirs(screenshots_dir, exist_ok=True)
             file_name = f"{test_name}_failed_{timestamp}.png"
             file_path = os.path.join(screenshots_dir, file_name)
@@ -78,7 +78,7 @@ def test_Equipments_page(org_login, take_screenshot):
     driver.find_element(By.XPATH, "//button[normalize-space()='Exercises']").click()
     time.sleep(1)
     driver.find_element(By.XPATH, "//*[@id='dropdown']/ul/li[2]/a").click()
-    time.sleep(1)
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -119,7 +119,7 @@ def test_Search_Equipments(org_login, take_screenshot):
     time.sleep(1)
     equipment = driver.find_element(By.XPATH, "/html/body/app-root/div[3]/app-view-exercise/div/div[2]/div[2]/div[1]/table/tbody/tr[1]/td[1]").text
     assert equipment == equipment_name
-    time.sleep(1)
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
