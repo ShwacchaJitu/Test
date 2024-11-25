@@ -11,7 +11,7 @@ from datetime import datetime
 def userprofile_analysis():
     driver = webdriver.Chrome()
     driver.maximize_window()
-    file_path = r"D:\pytest\login info.xlsx"
+    file_path = r"D:\userinfo\login info.xlsx"
     df = pd.read_excel(file_path)
     url = df.iloc[0, 1]
     stm1_userid = df.iloc[4, 1]
@@ -40,7 +40,7 @@ def take_screenshot(org_login, request):
     driver = org_login
     test_name = request.node.name
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    screenshots_dir = "D:/pytest/screenshots/Analysis"
+    screenshots_dir = r"D:\Testcase\screenshots/Analysis"
 
     os.makedirs(screenshots_dir, exist_ok=True)
 
@@ -64,7 +64,7 @@ def pytest_runtest_makereport(item, call):
         if driver:
             test_name = item.name
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-            screenshots_dir = "D:/pytest/screenshots/Analysis"
+            screenshots_dir = r"D:\Testcase\screenshots/Analysis"
             os.makedirs(screenshots_dir, exist_ok=True)
             file_name = f"{test_name}_failed_{timestamp}.png"
             file_path = os.path.join(screenshots_dir, file_name)
@@ -76,6 +76,7 @@ def test_Wellness_Score(userprofile_analysis, take_screenshot):
     driver = userprofile_analysis
     Wellness_Score = driver.find_element(By.XPATH, "//span[@class='card-title-history'][contains(text(),'Wellness Score')]").text
     assert Wellness_Score == "Wellness Score   7 Days"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -83,6 +84,7 @@ def test_Exercise(userprofile_analysis, take_screenshot):
     driver = userprofile_analysis
     Exercise = driver.find_element(By.XPATH, "//span[@class='card-title-history'][contains(text(),'Exercise')]").text
     assert Exercise == "Exercise"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -106,12 +108,15 @@ def test_Exercise_Calculation(userprofile_analysis, take_screenshot):
 
         assert total_sum_Exercise_data == 100.0 or total_sum_Exercise_data == 0.0
         assert complate_data_rount == dashboard_exercise_data_value
+        time.sleep(2)
         take_screenshot()
+        time.sleep(2)
 
 def test_Activity_Classification(userprofile_analysis, take_screenshot):
     driver = userprofile_analysis
     Activity_Classification = driver.find_element(By.XPATH,"//span[@class='card-title-history'][normalize-space()='Activity Classification']").text
     assert Activity_Classification == "Activity Classification"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -133,6 +138,7 @@ def test_Activity_Classification_calculation(userprofile_analysis, take_screensh
             total_Classification = total_Classification + float_data
     driver.find_element(By.XPATH, "//div[@id='activity-analysis-dashboard']//img[@alt='Minimize']").click()
     assert total_Classification == 100 or total_Classification == 0.0
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -140,6 +146,7 @@ def test_Sedentary_Classification(userprofile_analysis, take_screenshot):
     driver = userprofile_analysis
     Sedentary_Classification = driver.find_element(By.XPATH,"//span[@class='card-title-history'][normalize-space()='Sedentary Classification']").text
     assert Sedentary_Classification == "Sedentary Classification"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -165,6 +172,7 @@ def test_Sedentary_Classification_calculation(userprofile_analysis, take_screens
                 total_sedentary = total_sedentary + float_data
         driver.find_element(By.XPATH, "//div[@id='activity-sedentary-analysis-dashboard']//img[@alt='Minimize']").click()
         assert total_sedentary == 100.0 or total_sedentary == 0.0
+        time.sleep(2)
         take_screenshot()
         time.sleep(2)
 
@@ -172,6 +180,7 @@ def test_Status_Report_Tracker(userprofile_analysis, take_screenshot):
     driver = userprofile_analysis
     Status_Report_Tracker = driver.find_element(By.XPATH, "//div[normalize-space()='Status Report Tracker']").text
     assert  Status_Report_Tracker == "Status Report Tracker"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -179,6 +188,7 @@ def test_Medicine_and_Specialist_Nutrition_Intake(userprofile_analysis, take_scr
     driver = userprofile_analysis
     Medicine_Specialist_Nutrition_Intake = driver.find_element(By.XPATH,"//span[normalize-space()='Medicine & Specialist Nutrition Intake']").text
     assert Medicine_Specialist_Nutrition_Intake == "Medicine & Specialist Nutrition Intake"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -207,6 +217,7 @@ def test_Medicine_and_Specialist_Nutrition_Intake_calculation(userprofile_analys
             assert dashboard_medicinedata == taken_data_rounded
             print("dashboard_medicinedata", dashboard_medicinedata)
             print("taken_data_rounded", taken_data_rounded)
+            time.sleep(2)
             take_screenshot()
             time.sleep(2)
 
@@ -214,6 +225,7 @@ def test_Medicine_and_Specialist_Nutrition_Intake_calculation(userprofile_analys
 def test_Location(userprofile_analysis, take_screenshot):
     driver = userprofile_analysis
     Location = driver.find_element(By.XPATH, " //div[@class='log-minimize']//span[1]//img[1]").text
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -221,6 +233,7 @@ def test_Heart_Rates(userprofile_analysis, take_screenshot):
     driver = userprofile_analysis
     Heart_Rates = driver.find_element(By.XPATH, "//span[normalize-space()='Heart Rates']").text
     assert Heart_Rates == "Heart Rates"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -228,6 +241,7 @@ def test_Heart_Rate_Variability(userprofile_analysis, take_screenshot):
     driver = userprofile_analysis
     Heart_Rate_Variability = driver.find_element(By.XPATH,"//span[@class='card-title-history'][normalize-space()='Heart Rate Variability']").text
     assert Heart_Rate_Variability == "Heart Rate Variability"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -235,6 +249,7 @@ def test_Blood_Pressure(userprofile_analysis, take_screenshot):
     driver = userprofile_analysis
     Blood_Pressure = driver.find_element(By.XPATH,"//span[@class='card-title-history'][normalize-space()='Blood Pressure']").text
     assert Blood_Pressure == "Blood Pressure"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -242,6 +257,7 @@ def test_Blood_Glucose(userprofile_analysis, take_screenshot):
     driver = userprofile_analysis
     Blood_Glucose = driver.find_element(By.XPATH,"//span[@class='card-title-history'][normalize-space()='Blood Glucose']").text
     assert Blood_Glucose == "Blood Glucose"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -250,6 +266,7 @@ def test_Sleep_reported_and_Self_reported_SpO2_PR(userprofile_analysis, take_scr
     driver = userprofile_analysis
     Sleep_reported_SpO2_Self_reported_SpO2_PR_bpm = driver.find_element(By.XPATH, "//span[normalize-space()='Sleep-reported SpO2 , Self-reported SpO2 & PR bpm']").text
     assert Sleep_reported_SpO2_Self_reported_SpO2_PR_bpm == "Sleep-reported SpO2 , Self-reported SpO2 & PR bpm"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -257,6 +274,7 @@ def test_Body_Shape(userprofile_analysis, take_screenshot):
     driver = userprofile_analysis
     Body_shape = driver.find_element(By.XPATH, "//span[@class='card-title-history'][normalize-space()='Body shape']").text
     assert Body_shape == "Body shape"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -264,6 +282,7 @@ def test_Walk(userprofile_analysis, take_screenshot):
     driver = userprofile_analysis
     Walk = driver.find_element(By.XPATH, "//span[normalize-space()='Walk']").text
     assert Walk == "Walk"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -271,6 +290,7 @@ def test_Floors_Climbed(userprofile_analysis, take_screenshot):
     driver = userprofile_analysis
     Floors_Climbed = driver.find_element(By.XPATH, "//span[normalize-space()='Floors Climbed']").text
     assert Floors_Climbed == "Floors Climbed"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -278,6 +298,7 @@ def test_Water_Intake(userprofile_analysis, take_screenshot):
     driver = userprofile_analysis
     Water_Intake = driver.find_element(By.XPATH, "//span[normalize-space()='Water Intake']").text
     assert Water_Intake == "Water Intake"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -285,6 +306,7 @@ def test_Sleep_Analysis_and_Breathing_Rate(userprofile_analysis, take_screenshot
     driver = userprofile_analysis
     Sleep_Analysis_Breathing_Rate = driver.find_element(By.XPATH,"//span[normalize-space()='Sleep Analysis and Breathing Rate']").text
     assert Sleep_Analysis_Breathing_Rate == "Sleep Analysis and Breathing Rate"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -292,5 +314,6 @@ def test_Lipids(userprofile_analysis, take_screenshot):
     driver = userprofile_analysis
     Lipids = driver.find_element(By.XPATH, "//span[@class='card-title-history'][normalize-space()='Lipids']").text
     assert Lipids == "Lipids"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)

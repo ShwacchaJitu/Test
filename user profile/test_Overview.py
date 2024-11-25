@@ -11,7 +11,7 @@ from datetime import datetime
 def userprofile():
     driver = webdriver.Chrome()
     driver.maximize_window()
-    file_path = r"D:\pytest\login info.xlsx"
+    file_path = r"D:\userinfo\login info.xlsx"
     df = pd.read_excel(file_path)
     url = df.iloc[0, 1]
     stm1_userid = df.iloc[4, 1]
@@ -39,7 +39,7 @@ def take_screenshot(org_login, request):
     driver = org_login
     test_name = request.node.name
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    screenshots_dir = "D:/pytest/screenshots/Overview"
+    screenshots_dir = r"D:\Testcase\screenshots/Overview"
 
     os.makedirs(screenshots_dir, exist_ok=True)
 
@@ -63,7 +63,7 @@ def pytest_runtest_makereport(item, call):
         if driver:
             test_name = item.name
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-            screenshots_dir = "D:/pytest/screenshots/Overview"
+            screenshots_dir = r"D:\Testcase\screenshots/Overview"
             os.makedirs(screenshots_dir, exist_ok=True)
             file_name = f"{test_name}_failed_{timestamp}.png"
             file_path = os.path.join(screenshots_dir, file_name)
@@ -74,6 +74,7 @@ def test_bmi(userprofile, take_screenshot):
     driver = userprofile
     bmi = driver.find_element(By.XPATH,"//p[normalize-space()='BMI']").text
     assert bmi == bmi
+    time.sleep(1)
     take_screenshot()
     time.sleep(1)
 
@@ -93,9 +94,9 @@ def test_bmi_calculation(userprofile, take_screenshot):
         bmi_calculation = weight / (height ** 2)
         bmi_calculation = round(bmi_calculation, 2)
         assert bmi_calculation == bmi
+        time.sleep(2)
         take_screenshot()
         time.sleep(1)
-
 
 def test_Heart_Rate(userprofile, take_screenshot):
     driver = userprofile
@@ -104,50 +105,64 @@ def test_Heart_Rate(userprofile, take_screenshot):
     except:
         element = driver.find_element(By.XPATH, f"//div[normalize-space()='Resting Heart Rate']").text
     assert element == "Heart Rate" or element == "Resting Heart Rate"
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)
+
 
 def test_Sleep(userprofile, take_screenshot):
     driver = userprofile
     element = driver.find_element(By.XPATH, f"//div[normalize-space()='Sleep']").text
     assert element == "Sleep"
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)
+
 
 def test_Walk(userprofile, take_screenshot):
     driver = userprofile
     element = driver.find_element(By.XPATH, f"//div[normalize-space()='Walk']").text
     assert element == "Walk"
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)
+
 
 def test_Floors_Climbed(userprofile, take_screenshot):
     driver = userprofile
     element = driver.find_element(By.XPATH, f"//div[normalize-space()='Floors Climbed']").text
     assert element == "Floors Climbed"
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)
+
 
 def test_Blood_Pressure(userprofile, take_screenshot):
     driver = userprofile
     element = driver.find_element(By.XPATH, f"//div[normalize-space()='Blood Pressure']").text
     assert element == "Blood Pressure"
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)
+
 
 def test_Blood_Glucose_and_HbA1c(userprofile, take_screenshot):
     driver = userprofile
     element = driver.find_element(By.XPATH, f"//div[normalize-space()='Blood Glucose and HbA1c']").text
     assert element == "Blood Glucose and HbA1c"
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)
+
 
 def test_Wellness_Score(userprofile, take_screenshot):
     driver = userprofile
     element = driver.find_element(By.XPATH, f"//div[normalize-space()='Wellness Score']").text
     assert element == "Wellness Score"
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)
+
 
 def test_wellness_Calculation(userprofile, take_screenshot):
     driver =  userprofile
@@ -157,14 +172,15 @@ def test_wellness_Calculation(userprofile, take_screenshot):
     score_n_Data = int(score_n_Data.strip('%'))
     wellness_score = score_n_Data + score_p_Data
     assert wellness_score == 100
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)
-
 
 def test_Schedule(userprofile, take_screenshot):
     driver = userprofile
     element = driver.find_element(By.XPATH, f"//div[normalize-space()='Schedule']").text
     assert element == "Schedule"
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)
 
@@ -174,21 +190,24 @@ def test_Schedule_calculation(userprofile, take_screenshot):
     schedule_elements = driver.find_elements(By.XPATH, "//*[@id='overview-dashboards']/div[2]/div[4]/app-overall-status/div/div/div[2]/div/div/div/span[1]")
     total_schedule_data = [float(element.text.replace("%", "")) for element in schedule_elements if element.text.strip() != '--']
     assert dashboard_schedule == sum(total_schedule_data)
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)
-
 
 def test_Vital_Signs_from_Most_Recent_Sleep(userprofile, take_screenshot):
     driver = userprofile
     element = driver.find_element(By.XPATH, f"//div[normalize-space()='Vital Signs from Most Recent Sleep']").text
     assert element == "Vital Signs from Most Recent Sleep"
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)
+
 
 def test_Activity_and_Sedentary_Classification(userprofile, take_screenshot):
     driver = userprofile
     element = driver.find_element(By.XPATH, f"//div[normalize-space()='Activity and Sedentary Classification']").text
     assert element == "Activity and Sedentary Classification"
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)
 
@@ -204,6 +223,7 @@ def test_Activity_and_Sedentary_Classification_calculation(userprofile, take_scr
         total_activity.append(data_without_percent_activity)
     total_sum = sum(total_activity)
     assert total_sum == 100.0 or total_sum == 0.0
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)
 
@@ -212,19 +232,24 @@ def test_Lipids(userprofile, take_screenshot):
     driver = userprofile
     element = driver.find_element(By.XPATH, f"//div[normalize-space()='Lipids']").text
     assert element == "Lipids"
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)
+
 
 def test_Geolocation(userprofile, take_screenshot):
     driver = userprofile
     element = driver.find_element(By.XPATH, f"//div[normalize-space()='Geolocation']").text
     assert element == "Geolocation"
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)
+
 
 def test_Status_Report_Tracker(userprofile, take_screenshot):
     driver = userprofile
     element = driver.find_element(By.XPATH, f"//div[normalize-space()='Status Report Tracker']").text
     assert element == "Status Report Tracker"
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)

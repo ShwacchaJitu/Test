@@ -11,7 +11,7 @@ from datetime import datetime
 def userprofile_Analytics():
     driver = webdriver.Chrome()
     driver.maximize_window()
-    file_path = r"D:\pytest\login info.xlsx"
+    file_path = r"D:\userinfo\login info.xlsx"
     df = pd.read_excel(file_path)
     url = df.iloc[0, 1]
     stm1_userid = df.iloc[4, 1]
@@ -40,7 +40,7 @@ def take_screenshot(org_login, request):
     driver = org_login
     test_name = request.node.name
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    screenshots_dir = "D:/pytest/screenshots/Analytics"
+    screenshots_dir = r"D:\Testcase\screenshots/Analytics"
 
     os.makedirs(screenshots_dir, exist_ok=True)
 
@@ -64,7 +64,7 @@ def pytest_runtest_makereport(item, call):
         if driver:
             test_name = item.name
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-            screenshots_dir = "D:/pytest/screenshots/Analytics"
+            screenshots_dir = r"D:\Testcase\screenshots/Analytics"
             os.makedirs(screenshots_dir, exist_ok=True)
             file_name = f"{test_name}_failed_{timestamp}.png"
             file_path = os.path.join(screenshots_dir, file_name)
@@ -76,6 +76,7 @@ def test_Steps(userprofile_Analytics, take_screenshot):
     driver = userprofile_Analytics
     Steps = driver.find_element(By.XPATH, f"//span[@class='card-title-history'][normalize-space()='Steps']").text
     assert Steps == "Steps"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -83,6 +84,7 @@ def test_Breathing_Rate(userprofile_Analytics, take_screenshot):
     driver = userprofile_Analytics
     Breathing_Rate = driver.find_element(By.XPATH, f"//span[@class='card-title-history'][normalize-space()='Breathing Rate']").text
     assert Breathing_Rate == "Breathing Rate"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -90,6 +92,7 @@ def test_Wellbeing(userprofile_Analytics, take_screenshot):
     driver = userprofile_Analytics
     Wellbeing = driver.find_element(By.XPATH, f"//span[@class='card-title-history'][normalize-space()='Wellbeing']").text
     assert Wellbeing == "Wellbeing"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -97,6 +100,7 @@ def test_Anxiety(userprofile_Analytics, take_screenshot):
     driver = userprofile_Analytics
     Anxiety = driver.find_element(By.XPATH, f"//span[@class='card-title-history'][normalize-space()='Anxiety']").text
     assert Anxiety == "Anxiety"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -104,6 +108,7 @@ def test_Depression(userprofile_Analytics, take_screenshot):
     driver = userprofile_Analytics
     Depression = driver.find_element(By.XPATH, f"//span[@class='card-title-history'][normalize-space()='Depression']").text
     assert Depression == "Depression"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -111,6 +116,7 @@ def test_Floors(userprofile_Analytics, take_screenshot):
     driver = userprofile_Analytics
     Floors = driver.find_element(By.XPATH, f"//span[@class='card-title-history'][normalize-space()='Floors']").text
     assert Floors == "Floors"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -118,6 +124,7 @@ def test_Exercise(userprofile_Analytics, take_screenshot):
     driver = userprofile_Analytics
     Exercise = driver.find_element(By.XPATH, f"//span[@class='card-title-history'][normalize-space()='Exercise']").text
     assert Exercise == "Exercise"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 
@@ -125,6 +132,7 @@ def test_Distance(userprofile_Analytics, take_screenshot):
     driver = userprofile_Analytics
     Distance = driver.find_element(By.XPATH, f"//span[@class='card-title-history'][normalize-space()='Distance']").text
     assert Distance == "Distance"
+    time.sleep(2)
     take_screenshot()
     time.sleep(2)
 

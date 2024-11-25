@@ -11,7 +11,7 @@ from datetime import datetime
 def userprofile_specialist():
     driver = webdriver.Chrome()
     driver.maximize_window()
-    file_path = r"D:\pytest\login info.xlsx"
+    file_path = r"D:\userinfo\login info.xlsx"
     df = pd.read_excel(file_path)
     url = df.iloc[0, 1]
     stm1_userid = df.iloc[4, 1]
@@ -40,7 +40,7 @@ def take_screenshot(org_login, request):
     driver = org_login
     test_name = request.node.name
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    screenshots_dir = "D:/pytest/screenshots/Specialist"
+    screenshots_dir = r"D:\Testcase\screenshots/Specialist"
 
     os.makedirs(screenshots_dir, exist_ok=True)
 
@@ -64,7 +64,7 @@ def pytest_runtest_makereport(item, call):
         if driver:
             test_name = item.name
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-            screenshots_dir = "D:/pytest/screenshots/Specialist"
+            screenshots_dir = r"D:\Testcase\screenshots/Specialist"
             os.makedirs(screenshots_dir, exist_ok=True)
             file_name = f"{test_name}_failed_{timestamp}.png"
             file_path = os.path.join(screenshots_dir, file_name)
@@ -99,6 +99,7 @@ def test_Avg_Stride_Length(userprofile_specialist, take_screenshot):
     driver = userprofile_specialist
     Avg_Stride_Length = driver.find_element(By.XPATH, f"//span[normalize-space()='Avg. Stride Length']").text
     assert Avg_Stride_Length == "Avg. Stride Length"
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)
 
@@ -107,6 +108,7 @@ def test_Stride_Pattern_Analysis(userprofile_specialist, take_screenshot):
     driver = userprofile_specialist
     Avg_Stride_Length = driver.find_element(By.XPATH, f"//span[normalize-space()='Stride Pattern Analysis']").text
     assert Avg_Stride_Length == "Stride Pattern Analysis"
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)
 
@@ -114,13 +116,14 @@ def test_Stride_Duration_Analysis(userprofile_specialist, take_screenshot):
     driver = userprofile_specialist
     Stride_Duration_Analysis = driver.find_element(By.XPATH, f"//span[normalize-space()='Stride Duration Analysis']").text
     assert Stride_Duration_Analysis == "Stride Duration Analysis"
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)
-
 def test_Discomfort_Level(userprofile_specialist, take_screenshot):
     driver = userprofile_specialist
     Discomfort_Level = driver.find_element(By.XPATH, f"//span[normalize-space()='Discomfort Level']").text
     assert Discomfort_Level == "Discomfort Level"
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)
 
@@ -129,6 +132,7 @@ def test_AICVD_Score(userprofile_specialist_analysis, take_screenshot):
     driver = userprofile_specialist_analysis
     AICVD_Score = driver.find_element(By.XPATH, f"//span[normalize-space()='AICVD Score']").text
     assert AICVD_Score == "AICVD Score"
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)
 
@@ -136,6 +140,7 @@ def test_Stride_Level_Analysis(userprofile_specialist_analysis, take_screenshot)
     driver = userprofile_specialist_analysis
     Stride_Level_Analysis = driver.find_element(By.XPATH, f"//span[normalize-space()='Stride-Level Analysis']").text
     assert Stride_Level_Analysis == "Stride-Level Analysis"
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)
 
@@ -143,6 +148,7 @@ def test_Discomfort_Level(userprofile_specialist_analysis, take_screenshot):
     driver = userprofile_specialist_analysis
     Discomfort_Level = driver.find_element(By.XPATH, f"//span[normalize-space()='Discomfort Level']").text
     assert Discomfort_Level == "Discomfort Level"
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)
 
@@ -150,6 +156,7 @@ def test_Stride_Length(userprofile_specialist_analysis, take_screenshot):
     driver = userprofile_specialist_analysis
     Stride_Length = driver.find_element(By.XPATH, f"//span[normalize-space()='Stride Length']").text
     assert Stride_Length == "Stride Length"
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)
 
@@ -157,5 +164,6 @@ def test_Discomfort_Log(userprofile_specialist_analysis, take_screenshot):
     driver = userprofile_specialist_analysis
     Discomfort_Log = driver.find_element(By.XPATH, f"//span[normalize-space()='Discomfort Log']").text
     assert Discomfort_Log == "Discomfort Log"
+    time.sleep(2)
     take_screenshot()
     time.sleep(1)
