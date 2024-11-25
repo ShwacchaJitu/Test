@@ -7,12 +7,11 @@ import os
 from datetime import datetime
 
 
-
 @pytest.fixture()
 def login():
     driver = webdriver.Chrome()
     driver.maximize_window()
-    file_path = r"D:\pytest\login info.xlsx"
+    file_path = r"D:\userinfo\login info.xlsx"
     df = pd.read_excel(file_path)
     global url
     global facility_userid
@@ -49,7 +48,7 @@ def take_screenshot(login, request):
     driver = login
     test_name = request.node.name
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    screenshots_dir = "D:/pytest/screenshots/login_logout"
+    screenshots_dir = r"D:\Testcase\screenshots/login_logout"
 
     os.makedirs(screenshots_dir, exist_ok=True)
 
@@ -73,7 +72,7 @@ def pytest_runtest_makereport(item, call):
         if driver:
             test_name = item.name
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-            screenshots_dir = "D:/pytest/screenshots/login_logout"
+            screenshots_dir = r"D:\Testcase\screenshots/login_logout"
             os.makedirs(screenshots_dir, exist_ok=True)
             file_name = f"{test_name}_failed_{timestamp}.png"
             file_path = os.path.join(screenshots_dir, file_name)

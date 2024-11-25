@@ -13,7 +13,7 @@ def user():
     driver.maximize_window()
     driver = webdriver.Chrome()
     driver.maximize_window()
-    file_path = r"D:\pytest\login info.xlsx"
+    file_path = r"D:\userinfo\login info.xlsx"
     df = pd.read_excel(file_path)
     url = df.iloc[0, 1]
     org_userid = df.iloc[1, 1]
@@ -38,7 +38,7 @@ def take_screenshot(org_login, request):
     driver = org_login
     test_name = request.node.name
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    screenshots_dir = "D:/pytest/screenshots/User_page"
+    screenshots_dir = r"D:\Testcase\screenshots/User_page"
 
     os.makedirs(screenshots_dir, exist_ok=True)
 
@@ -62,7 +62,7 @@ def pytest_runtest_makereport(item, call):
         if driver:
             test_name = item.name
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-            screenshots_dir = "D:/pytest/screenshots/User_page"
+            screenshots_dir = r"D:\Testcase\screenshots/User_page"
             os.makedirs(screenshots_dir, exist_ok=True)
             file_name = f"{test_name}_failed_{timestamp}.png"
             file_path = os.path.join(screenshots_dir, file_name)
@@ -75,17 +75,17 @@ def test_Assigned_User(user, take_screenshot):
     driver.find_element(By.XPATH,"//span[normalize-space()='Organisation']").click()
     time.sleep(2)
     driver.find_element(By.XPATH,"//a[normalize-space()='Users']").click()
-    time.sleep(1)
-    take_screenshot()
     time.sleep(2)
+    take_screenshot()
+    time.sleep(1)
 
 def test_Assigned_User(user, take_screenshot):
     driver = user
     driver.find_element(By.XPATH, "//button[normalize-space()='Sort']")
     driver.find_element(By.XPATH, "//img[@title='Refresh']")
-    time.sleep(1)
-    take_screenshot()
     time.sleep(2)
+    take_screenshot()
+    time.sleep(1)
 
 def test_all_User(user, take_screenshot):
     driver = user
@@ -94,9 +94,9 @@ def test_all_User(user, take_screenshot):
     driver.find_element(By.XPATH, "//button[normalize-space()='Sort']")
     driver.find_element(By.XPATH, "//input[@placeholder='Search']")
     driver.find_element(By.XPATH, "//img[@title='Refresh']")
-    time.sleep(1)
-    take_screenshot()
     time.sleep(2)
+    take_screenshot()
+    time.sleep(1)
 
 def test_Unassigned_User(user, take_screenshot):
     driver = user
@@ -105,44 +105,45 @@ def test_Unassigned_User(user, take_screenshot):
     driver.find_element(By.XPATH, "//button[normalize-space()='Sort']")
     driver.find_element(By.XPATH, "//input[@placeholder='Search']")
     driver.find_element(By.XPATH, "//img[@title='Refresh']")
-    time.sleep(1)
-    take_screenshot()
     time.sleep(2)
+    take_screenshot()
+    time.sleep(1)
 
 def test_Pending_Onboarding_User(user, take_screenshot):
     driver = user
     driver.find_element(By.XPATH, "//div[@class='user-list-title']//div[@class='dropdown']").click()
     driver.find_element(By.XPATH, "//div[@class='user-list-title']//li[4]//a[1]").click()
     driver.find_element(By.XPATH, "//img[@title='Refresh']")
-    time.sleep(1)
-    take_screenshot()
     time.sleep(2)
+    take_screenshot()
+    time.sleep(1)
 
 def test_Pending_Activation_User(user, take_screenshot):
     driver = user
     driver.find_element(By.XPATH, "//div[@class='user-list-title']//div[@class='dropdown']").click()
     driver.find_element(By.XPATH, "//div[@class='user-list-title']//li[5]//a[1]").click()
     driver.find_element(By.XPATH, "//img[@title='Refresh']")
-    time.sleep(1)
-    take_screenshot()
     time.sleep(2)
+    take_screenshot()
+    time.sleep(1)
 
 def test_Invited_User(user, take_screenshot):
     driver = user
     driver.find_element(By.XPATH, "//div[@class='user-list-title']//div[@class='dropdown']").click()
     driver.find_element(By.XPATH, "//div[@class='user-list-title']//li[6]//a[1]").click()
     driver.find_element(By.XPATH, "//img[@title='Refresh']")
-    time.sleep(1)
-    take_screenshot()
     time.sleep(2)
+    take_screenshot()
+    time.sleep(1)
 
 def test_reinvited_User(user, take_screenshot):
     driver = user
     driver.find_element(By.XPATH,"//body[1]/app-root[1]/div[3]/app-all-patients[1]/div[1]/div[2]/div[2]/div[1]/table[1]/tbody[1]/tr[1]/td[8]/div[1]/span[1]/img[1]").click()
     driver.find_element(By.XPATH, "//div[contains(text(),'Resend Invitation')]").click()
-    time.sleep(1)
-    take_screenshot()
     time.sleep(2)
+    take_screenshot()
+    time.sleep(1)
+
 
 
 
