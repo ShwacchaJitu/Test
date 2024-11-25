@@ -130,3 +130,5 @@ driver.execute_script("arguments[0].click();", element)
 time.sleep(3)
 
 time.sleep(3)
+time.sleep(3)
+time.sleep(3)
