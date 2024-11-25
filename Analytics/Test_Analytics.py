@@ -41,7 +41,7 @@ def take_screenshot(userprofile, request):
     driver = userprofile
     test_name = request.node.name
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    screenshots_dir = "D:\Testcase\screenshots\Analytics"
+    screenshots_dir = r"D:\Testcase\screenshots\Analytics"
 
     os.makedirs(screenshots_dir, exist_ok=True)
 
@@ -65,7 +65,7 @@ def pytest_runtest_makereport(item, call):
         if driver:
             test_name = item.name
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-            screenshots_dir = "D:\Testcase\screenshots\Analytics"
+            screenshots_dir = r"D:\Testcase\screenshots\Analytics"
             os.makedirs(screenshots_dir, exist_ok=True)
             file_name = f"{test_name}_failed_{timestamp}.png"
             file_path = os.path.join(screenshots_dir, file_name)
