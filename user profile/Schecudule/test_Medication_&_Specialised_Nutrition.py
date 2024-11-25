@@ -14,7 +14,7 @@ from datetime import datetime
 def userprofile_schedule():
     driver = webdriver.Chrome()
     driver.maximize_window()
-    file_path = r"D:\pytest\login info.xlsx"
+    file_path = r"D:\userinfo\login info.xlsx"
     df = pd.read_excel(file_path)
     url = df.iloc[0, 1]
     stm1_userid = df.iloc[4, 1]
@@ -42,7 +42,7 @@ def take_screenshot(org_login, request):
     driver = org_login
     test_name = request.node.name
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    screenshots_dir = "D:/pytest/screenshots/Medication_&_Specialised_Nutrition"
+    screenshots_dir = r"D:\Testcase\screenshots/Medication_&_Specialised_Nutrition"
 
     os.makedirs(screenshots_dir, exist_ok=True)
 
@@ -66,7 +66,7 @@ def pytest_runtest_makereport(item, call):
         if driver:
             test_name = item.name
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-            screenshots_dir = "D:/pytest/screenshots/Medication_&_Specialised_Nutrition"
+            screenshots_dir = r"D:\Testcase\screenshots/Medication_&_Specialised_Nutrition"
             os.makedirs(screenshots_dir, exist_ok=True)
             file_name = f"{test_name}_failed_{timestamp}.png"
             file_path = os.path.join(screenshots_dir, file_name)
