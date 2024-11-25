@@ -13,7 +13,7 @@ from datetime import datetime
 
 driver = webdriver.Chrome()
 driver.maximize_window()
-file_path = r"D:\pytest\login info.xlsx"
+file_path = r"D:\userinfo\login info.xlsx"
 df = pd.read_excel(file_path)
 url = df.iloc[0, 1]
 stm1_userid = df.iloc[4, 1]
@@ -129,8 +129,3 @@ element = WebDriverWait(driver, 10).until(
 driver.execute_script("arguments[0].click();", element)
 time.sleep(3)
 
-time.sleep(3)
-time.sleep(3)
-time.sleep(3)
-time.sleep(3)
-time.sleep(3)
