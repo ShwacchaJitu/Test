@@ -16,7 +16,7 @@ def org_login():
     url = df.iloc[0, 1]
     org_userid = df.iloc[1, 1]
     org_pass = df.iloc[1, 2]
-    otp = df.iloc[3, 3]
+    otp = df.iloc[1, 3]
     driver.get(url)
     driver.implicitly_wait(100)
     driver.find_element(By.XPATH, "//div[@class='login-form']//div[1]//label[1]").send_keys(org_userid)

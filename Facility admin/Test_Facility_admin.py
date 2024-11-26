@@ -23,7 +23,7 @@ def org_login():
     driver.find_element(By.XPATH, "//div[@class='divisions']//div[2]//label[1]//input[1]").send_keys(org_pass)
     driver.find_element(By.XPATH, "//input[@value='Sign In']").click()
     time.sleep(5)
-    otp = 111222
+    otp = df.iloc[1, 3]
     driver.find_element(By.XPATH, "//input[@id='inp']").send_keys(otp)
     driver.find_element(By.XPATH, "//input[@value='Submit']").click()
     time.sleep(5)
