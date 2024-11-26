@@ -75,6 +75,7 @@ def test_Equipments_page(org_login, take_screenshot):
     driver.find_element(By.XPATH, "//span[normalize-space()='Programme Management']").click()
     driver.find_element(By.XPATH, "//a[normalize-space()='Physiotherapy']").click()
     time.sleep(2)
+    driver.find_element(By.XPATH, "//img[@title='Refresh']").click()
     driver.find_element(By.XPATH, "//*[@id='dropdown']/button").click()
     time.sleep(1)
     driver.find_element(By.XPATH, "//a[normalize-space()='Equipments']").click()
