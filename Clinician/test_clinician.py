@@ -25,7 +25,7 @@ def org_login():
     driver.find_element(By.XPATH, "//div[@class='divisions']//div[2]//label[1]//input[1]").send_keys(org_pass)
     driver.find_element(By.XPATH, "//input[@value='Sign In']").click()
     time.sleep(5)
-    otp = 111222
+    otp = df.iloc[1, 3]
     driver.find_element(By.XPATH, "//input[@id='inp']").send_keys(otp)
     driver.find_element(By.XPATH, "//input[@value='Submit']").click()
     time.sleep(2)
@@ -180,7 +180,7 @@ def test_edit_stm(org_login, take_screenshot):
     driver.find_element(By.XPATH, "//div[normalize-space()='Affiliation']").click()
     driver.find_element(By.XPATH, "//div[@class='schedule-custom-dropdown-single']//img").click()
     time.sleep(1)
-    driver.find_element(By.XPATH,"//*[@id='add-doctor']/div/div/div/div/app-edit-doctor/div[1]/div[2]/div[2]/form/div[3]/div/app-assign-care-team-facility-dept/form/div[1]/div/div/div[1]/div/div/ul/li[2]").click()
+    driver.find_element(By.XPATH,"//*[@id='add-doctor']/div/div/div/div/app-edit-doctor/div[1]/div[2]/div[2]/form/div[3]/div/app-assign-care-team-facility-dept/form/div[1]/div/div/div[1]/div/div/ul/li[1]").click()
     driver.find_element(By.XPATH, "//div[@class='schedule-custom-dropdown']//img").click()
     time.sleep(2)
     driver.find_element(By.XPATH,"//*[@id='add-doctor']/div/div/div/div/app-edit-doctor/div[1]/div[2]/div[2]/form/div[3]/div/app-assign-care-team-facility-dept/form/div[1]/div/div/div[2]/div/div[1]/ul/li[2]").click()
