@@ -16,7 +16,7 @@ def userprofile_Challenges():
     url = df.iloc[0, 1]
     stm1_userid = df.iloc[4, 1]
     stm1_pass = df.iloc[4, 2]
-    otp = df.iloc[3, 3]
+    otp = df.iloc[4, 3]
     driver.get(url)
     driver.implicitly_wait(100)
     driver.find_element(By.XPATH, "//div[@class='login-form']//div[1]//label[1]").send_keys(stm1_userid)
@@ -40,7 +40,7 @@ def take_screenshot(org_login, request):
     driver = org_login
     test_name = request.node.name
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    screenshots_dir = r"D:\Testcase\screenshots/Challange"
+    screenshots_dir = r"D:\Testcase\screenshots/Challenge"
 
     os.makedirs(screenshots_dir, exist_ok=True)
 

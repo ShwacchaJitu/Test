@@ -16,7 +16,7 @@ def user_onboarding():
     url = df.iloc[0, 1]
     stm1_userid = df.iloc[4, 1]
     stm1_pass = df.iloc[4, 2]
-    otp = df.iloc[3, 3]
+    otp = df.iloc[4, 3]
     driver.get(url)
     driver.implicitly_wait(100)
     driver.find_element(By.XPATH, "//div[@class='login-form']//div[1]//label[1]").send_keys(stm1_userid)
