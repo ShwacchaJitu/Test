@@ -74,10 +74,10 @@ def test_Equipments_page(org_login, take_screenshot):
     driver = org_login
     driver.find_element(By.XPATH, "//span[normalize-space()='Programme Management']").click()
     driver.find_element(By.XPATH, "//a[normalize-space()='Physiotherapy']").click()
+    time.sleep(2)
+    driver.find_element(By.XPATH, "//*[@id='dropdown']/button").click()
     time.sleep(1)
-    driver.find_element(By.XPATH, "//button[normalize-space()='Exercises']").click()
-    time.sleep(1)
-    driver.find_element(By.XPATH, "//*[@id='dropdown']/ul/li[2]/a").click()
+    driver.find_element(By.XPATH, "//a[normalize-space()='Equipments']").click()
     time.sleep(2)
     take_screenshot()
     time.sleep(2)
