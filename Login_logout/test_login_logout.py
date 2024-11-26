@@ -20,7 +20,7 @@ def login():
     facility_userid = df.iloc[2, 1]
     facility_pass = df.iloc[2, 2]
     url = df.iloc[0, 1]
-    otp = df.iloc[3, 3]
+    otp = df.iloc[2, 3]
     driver.get(url)
     driver.implicitly_wait(10)
     yield driver  # Yielding the driver instance
@@ -68,7 +68,7 @@ def pytest_runtest_makereport(item, call):
     report = outcome.get_result()
 
     if report.when == "call" and report.failed:
-        driver = item.funcargs.get('org_login')
+        driver = item.funcargs.get('facility_login')
         if driver:
             test_name = item.name
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
