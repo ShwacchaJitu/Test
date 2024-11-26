@@ -16,7 +16,7 @@ def userprofile_schedule():
     url = df.iloc[0, 1]
     stm1_userid = df.iloc[4, 1]
     stm1_pass = df.iloc[4, 2]
-    otp = df.iloc[3, 3]
+    otp = df.iloc[4, 3]
     user = df.iloc[10, 1]
     driver.get(url)
     driver.implicitly_wait(100)
