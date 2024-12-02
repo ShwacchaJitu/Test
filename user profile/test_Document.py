@@ -8,6 +8,7 @@ import os
 from datetime import datetime
 
 
+
 @pytest.fixture(scope="module")
 def userprofile_document():
     driver = webdriver.Chrome()
@@ -122,9 +123,9 @@ def test_Document_Archive(userprofile_document, take_screenshot):
     time.sleep(6)
     driver.find_element(By.XPATH, "//button[normalize-space()='Files']").click()
     driver.find_element(By.XPATH, "//a[@id='Archived']").click()
-    time.sleep(1)
-    driver.find_element(By.XPATH, "//tr[@class='ng-star-inserted']//span[@class='checkmark']").click()
-    time.sleep(2)
+    time.sleep(3)
+    driver.find_element(By.XPATH, "/html/body/app-root/div[3]/app-profile/div[1]/div[2]/div/app-archive-document/div[1]/div[2]/div[2]/div[1]/table/tbody/tr/td[1]/label/span").click()
+    time.sleep(4)
     driver.find_element(By.XPATH, "/html/body/app-root/div[3]/app-profile/div[1]/div[2]/div/app-archive-document/div[1]/div[2]/div[2]/div[3]/div/div[2]/img").click()
     time.sleep(3)
     driver.find_element(By.XPATH, "/html/body/app-root/div[3]/app-profile/div[1]/div[2]/div/app-archive-document/div[2]/div/div/div/div/div[2]/div/button[2]").click()

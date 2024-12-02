@@ -6,6 +6,9 @@ import re
 import pandas as pd
 import os
 from datetime import datetime
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
+
 
 @pytest.fixture(scope="module")
 def userprofile_analysis():
@@ -170,7 +173,9 @@ def test_Sedentary_Classification_calculation(userprofile_analysis, take_screens
             else:
                 float_data = 0.0
                 total_sedentary = total_sedentary + float_data
-        driver.find_element(By.XPATH, "//div[@id='activity-sedentary-analysis-dashboard']//img[@alt='Minimize']").click()
+        element = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//*[@id='activity-sedentary-analysis-dashboard']/div[1]/img")))
+        driver.execute_script("arguments[0].click();", element)
+        # driver.find_element(By.XPATH, "//div[@id='activity-sedentary-analysis-dashboard']//img[@alt='Minimize']").click()
         assert total_sedentary == 100.0 or total_sedentary == 0.0
         time.sleep(2)
         take_screenshot()

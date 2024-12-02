@@ -71,29 +71,6 @@ def pytest_runtest_makereport(item, call):
             driver.save_screenshot(file_path)
             print(f"Screenshot for failed test saved at {file_path}")
 
-@pytest.fixture(scope="module")
-def userprofile_specialist_analysis():
-    driver = webdriver.Chrome()
-    driver.maximize_window()
-    driver.get("https://hpb-dev.connectedlife.io/#/login")
-    driver.implicitly_wait(100)
-    driver.find_element(By.XPATH, "//div[@class='login-form']//div[1]//label[1]").send_keys("clhstmdev@yopmail.com")
-    driver.find_element(By.XPATH, "//div[@class='divisions']//div[2]//label[1]//input[1]").send_keys("Clifestm@1234!")
-    driver.find_element(By.XPATH, "//input[@value='Sign In']").click()
-    time.sleep(3)
-    otp = 111222
-    driver.find_element(By.XPATH, "//input[@id='inp']").send_keys(otp)
-    driver.find_element(By.XPATH, "//input[@value='Submit']").click()
-    time.sleep(5)
-    driver.find_element(By.XPATH, "//input[@placeholder='Search']").send_keys("Francis")
-    driver.find_element(By.XPATH,"//div[@class='p-element blurry-text']").click()
-    driver.find_element(By.XPATH,"//a[@id='Specialist']").click()
-    time.sleep(3)
-    driver.find_element(By.XPATH, "//button[@id='nz-tabs-0-tab-1']").click()
-    time.sleep(3)
-    yield driver  # Yielding the driver instance
-    driver.quit()
-
 
 def test_Avg_Stride_Length(userprofile_specialist, take_screenshot):
     driver = userprofile_specialist
