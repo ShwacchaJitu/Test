@@ -79,7 +79,8 @@ def test_assign_nudge_or_alerts(userprofile_Alerts_nudge, take_screenshot):
     global description
     description = fake.sentence()
     driver.find_element(By.XPATH, "//a[@id='Alerts/Nudges']").click()
-    driver.find_element(By.XPATH, "//div[@class='invite-new-patient-btn ng-star-inserted']").click()
+    time.sleep(2)
+    driver.find_element(By.XPATH, "//div[@class='add-patient-btn']").click()
     time.sleep(2)
     driver.find_element(By.XPATH, "//body[1]/app-root[1]/div[3]/app-profile[1]/div[1]/div[2]/div[1]/app-alerts[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/app-add-alerts[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/app-alert-templates[1]/form[1]/div[1]/div[2]/label[1]/span[1]").click()
     driver.find_element(By.XPATH, "//*[@id='add-alert']/div/div/div/div/app-add-alerts/div/div/div[2]/div[2]/div/div/div[2]/app-alert-templates/form/div[2]/div[2]/div[2]/app-template-item[1]").click()
