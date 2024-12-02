@@ -35,9 +35,9 @@ def userprofile_Analytics():
     driver.quit()
 
 @pytest.fixture
-def take_screenshot(userprofile_schedule, request):
+def take_screenshot(userprofile_Analytics, request):
     """Fixture to capture a screenshot at specific points in the test."""
-    driver = userprofile_schedule
+    driver = userprofile_Analytics
     test_name = request.node.name
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
     screenshots_dir = r"D:\Testcase\screenshots/Analytics"
