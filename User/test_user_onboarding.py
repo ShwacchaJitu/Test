@@ -6,6 +6,9 @@ import re
 import pandas as pd
 import os
 from datetime import datetime
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
+
 
 @pytest.fixture(scope="module")
 def user_onboarding():
@@ -73,7 +76,10 @@ def test_user_onboarding(user_onboarding, take_screenshot):
     time.sleep(2)
     driver.find_element(By.XPATH,"/html/body/app-root/div[3]/app-users/div[1]/div[1]/div[3]/div/ul/li[2]").click()
     time.sleep(2)
-    driver.find_element(By.XPATH,"//body[1]/app-root[1]/div[3]/app-pending-onboarding-patient[1]/div[1]/div[2]/div[2]/div[1]/table[1]/tbody[1]/tr[2]/td[7]/div[1]/button[1]").click()
+    element = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[normalize-space()='Onboard']")))
+    driver.execute_script("arguments[0].click();", element)
+
+    # driver.find_element(By.XPATH,"//button[normalize-space()='Onboard']").click()
     driver.find_element(By.XPATH,"//span[@class='ng-arrow-wrapper']").click()
     time.sleep(2)
     # driver.find_element(By.XPATH,"//input[@placeholder='search country']").send_keys("United Kingdom")
