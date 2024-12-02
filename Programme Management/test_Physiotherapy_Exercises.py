@@ -149,7 +149,7 @@ def test_delete_Physiotherapy(org_login, take_screenshot):
     driver.find_element(By.XPATH, "//button[normalize-space()='Delete Exersice']").click()
     time.sleep(3)
     take_screenshot()
-    time.sleep(4)
+    time.sleep(3)
     driver.find_element(By.XPATH, "//img[@title='Refresh']").click()
     time.sleep(2)
 
