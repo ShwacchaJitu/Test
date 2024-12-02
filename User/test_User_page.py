@@ -33,9 +33,9 @@ def user():
 
 
 @pytest.fixture
-def take_screenshot(org_login, request):
+def take_screenshot(user, request):
     """Fixture to capture a screenshot at specific points in the test."""
-    driver = org_login
+    driver = user
     test_name = request.node.name
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
     screenshots_dir = r"D:\Testcase\screenshots/User_page"
@@ -70,7 +70,7 @@ def pytest_runtest_makereport(item, call):
             print(f"Screenshot for failed test saved at {file_path}")
 
 
-def test_Assigned_User(user, take_screenshot):
+def test_landing_page(user, take_screenshot):
     driver = user
     driver.find_element(By.XPATH,"//span[normalize-space()='Organisation']").click()
     time.sleep(2)
