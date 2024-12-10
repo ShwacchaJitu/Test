@@ -6,6 +6,7 @@ from faker import Faker
 import pandas as pd
 import os
 from datetime import datetime
+from selenium.webdriver.common.action_chains import ActionChains
 
 @pytest.fixture(scope="module")
 def userprofile_schedule():
@@ -88,12 +89,17 @@ def test_create_Activity(userprofile_schedule, take_screenshot):
     time.sleep(1)
     driver.find_element(By.XPATH, "//span[normalize-space()='Walking (For Stride Analysis)']").click()
     time.sleep(5)
-    driver.find_element(By.XPATH, "//button[@class='btn-outline-single']").click()
+    button = driver.find_element(By.XPATH, "//button[@class='btn-outline-single']")
+    actions = ActionChains(driver)
+    actions.move_to_element(button).click().perform()
     time.sleep(2)
-    driver.find_element(By.XPATH, "//input[@placeholder='Eg. Take 2-3 minutes rest in between each set.']").send_keys("Create using automation")
+    driver.find_element(By.XPATH, "//input[@placeholder='Eg. Take 2-3 minutes rest in between each set.']").send_keys( "Create using automation")
     time.sleep(2)
     driver.find_element(By.XPATH, "//div[contains(text(),'End Date')]//img").click()
-    driver.find_element(By.XPATH, "//li[normalize-space()='Number of Days']").click()
+    time.sleep(2)
+    button = driver.find_element(By.XPATH, "//li[normalize-space()='Number of Days']")
+    actions = ActionChains(driver)
+    actions.move_to_element(button).click().perform()
     time.sleep(2)
     driver.find_element(By.XPATH, "//input[@type='number']").clear()
     driver.find_element(By.XPATH, "//input[@type='number']").send_keys(5)
@@ -102,9 +108,12 @@ def test_create_Activity(userprofile_schedule, take_screenshot):
     time.sleep(4)
 
 
+
 def test_assign_Activity(userprofile_schedule, take_screenshot):
     driver = userprofile_schedule
-    driver.find_element(By.XPATH, "//button[normalize-space()='Add to Schedule']").click()
+    button = driver.find_element(By.XPATH, "//button[normalize-space()='Add to Schedule']")
+    actions = ActionChains(driver)
+    actions.move_to_element(button).click().perform()
     time.sleep(3)
     take_screenshot()
     time.sleep(4)
@@ -119,9 +128,10 @@ def test_edit_Activity(userprofile_schedule, take_screenshot):
     driver.find_element(By.XPATH, "//div[normalize-space()='Number of Days']//img").click()
     time.sleep(2)
     driver.find_element(By.XPATH, "//li[normalize-space()='End Date']").click()
-    # driver.find_element(By.XPATH, "//div[@aria-disabled='false'][normalize-space()='30']").click()
     time.sleep(2)
-    driver.find_element(By.XPATH, "//button[normalize-space()='Update Schedule']").click()
+    button = driver.find_element(By.XPATH, "//button[normalize-space()='Update Schedule']")
+    actions = ActionChains(driver)
+    actions.move_to_element(button).click().perform()
     time.sleep(3)
     take_screenshot()
     time.sleep(4)
